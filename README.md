@@ -1,2 +1,0 @@
-# MaxCoreUtilities
-A Utilities App
