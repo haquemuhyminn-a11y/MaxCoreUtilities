@@ -3,91 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maxcore Utilities Download</title>
+<title>Maxcore Utilities</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    overflow-x: hidden;
+  }
 
-    .container {
-        background: #2b2b2b;
-        padding: 40px;
-        border-radius: 5px;
-        text-align: center;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    }
+  /* Banner */
+  .banner {
+    width: 100%;
+    height: 250px;
+    background-image: url('Max core utilities showcase.png'); /* Your image */
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4); /* Dark overlay for better text readability */
+    border-radius: 0 0 5px 5px;
+  }
+  .banner h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
+  }
+  .banner p {
+    font-size: 1.2em;
+    color: #ccc;
+    margin-top: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
+  }
 
-    /* Showcase image with hover effect */
-    .container img {
-        width: 100%;
-        max-width: 834px;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  /* Burger Icon */
+  .burger {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    width: 25px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .burger div {
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: 0.4s ease;
+  }
 
-    .container img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 20px 40px rgba(255, 136, 0, 0.5);
-        cursor: pointer;
-    }
+  /* Side Menu */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+    border-radius: 0 5px 5px 0;
+    transition: left 0.4s ease;
+    z-index: 1000;
+    padding-top: 80px;
+  }
+  .side-menu.active { left: 0; }
+  .side-menu a {
+    display: block;
+    color: #fff;
+    padding: 18px 25px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    border-radius: 5px;
+  }
+  .side-menu a:hover { background-color: #007bff; }
 
-    h1 {
-        color: #fff;
-        margin-bottom: 20px;
-    }
+  /* Sections (hide by default) */
+  .section {
+    display: none;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+  .section.active { display: block; }
+  .section h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .section p {
+    color: #ccc;
+    line-height: 1.6em;
+    white-space: pre-line;
+  }
 
-    p {
-        color: #ccc;
-        margin-bottom: 30px;
-    }
+  /* Dashboard Cards */
+  .dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  .card {
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card h3 { color: #007bff; margin-top: 0; }
+  .card p { color: #ccc; line-height: 1.5em; max-height: 50px; overflow: hidden; transition: max-height 0.4s ease; }
+  .card.expanded p { max-height: 1000px; }
 
-    .buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-    }
+  .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    cursor: pointer;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: 0.4s ease;
+  }
+  .btn:hover { background-color: #0056d2; transform: scale(1.05); }
 
-    .buttons a button {
-        background: linear-gradient(135deg, #ff8800, #ffa500);
-        border: none;
-        color: #fff;
-        padding: 12px 25px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s, transform 0.3s;
-    }
+  /* Download Section Alignment Fix */
+  .download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    .buttons a button:hover {
-        background: linear-gradient(135deg, #ffa500, #ffb733);
-        transform: scale(1.05);
-    }
+  .download-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .download-text {
+    color: #ccc;
+    min-width: 200px;
+  }
+
 </style>
 </head>
 <body>
-<div class="container">
-    <img src="Max core utilities showcase.png" alt="Maxcore Utilities Showcase">
-    <h1>Maxcore Utilities</h1>
-    <p>Choose your platform to download the latest version:</p>
-    <div class="buttons">
-        <a href="MaxCoreUtilitiesWindows.zip" download>
-            <button>Windows</button>
-        </a>
-        <a href="MaxcoreUtilitiesMac.zip" download>
-            <button>Mac</button>
-        </a>
-        <a href="MaxcoreUtilitiesLinux.zip" download>
-            <button>Linux</button>
-        </a>
-    </div>
+
+<!-- Burger Icon -->
+<div class="burger" onclick="toggleMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
 </div>
+
+<!-- Side Menu -->
+<div class="side-menu" id="sideMenu">
+  <a href="#" onclick="showSection('dashboard')">Home</a>
+  <a href="#" onclick="showSection('contact')">Contact Us</a>
+  <a href="#" onclick="showSection('about')">About Us</a>
+  <a href="#" onclick="showSection('download')">Download</a>
+</div>
+
+<!-- Banner -->
+<div class="banner">
+  <h1>Maxcore Utilities</h1>
+  <p>by Wave Studios   •   Efficient, Modern, Fully Functional</p>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+  <!-- Dashboard Section -->
+  <section id="dashboard" class="section active">
+    <h2>Dashboard</h2>
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Calculator</h3>
+        <p>Powerful calculator for your needs.</p>
+        <button class="btn" onclick="toggleCard(this)">Read More</button>
+      </div>
+      <div class="card">
+        <h3>Notes</h3>
+        <p>Create and organize notes efficiently.</p>
+        <button class="btn" onclick="toggleCard(this)">Read More</button>
+      </div>
+      <div class="card">
+        <h3>FileSystem</h3>
+        <p>Manage files and directories easily.</p>
+        <button class="btn" onclick="toggleCard(this)">Read More</button>
+      </div>
+      <div class="card">
+        <h3>Clock</h3>
+        <p>Keep track of time, alarms, and timers.</p>
+        <button class="btn" onclick="toggleCard(this)">Read More</button>
+      </div>
+      <div class="card">
+        <h3>Download Utility</h3>
+        <p>Access download tools and resources.</p>
+        <button class="btn" onclick="toggleCard(this)">Read More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>
+To make better updates, please contact us at haquemuhyminn@gmail.com. We'll help you to make your wish fully.  
+You can ask anything about Maxcore Utilities, suggest new features, or report issues.  
+Our team at Wave Studios will review every message carefully and try to implement your ideas as soon as possible.  
+Please make sure to include all details when contacting us.  
+
+We value every user feedback. Your suggestions help us make the software better and more efficient.  
+Whether it is a minor UI tweak or a major feature request, we are open to hearing from you.  
+Feel free to include screenshots or examples if it helps explain your point.
+    </p>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p>
+Wave Studios created Maxcore Utilities to provide users with a modern, efficient, and fully functional utility platform.  
+Our mission is to combine creativity with productivity, giving users tools they actually enjoy using.  
+Wave Studios is dedicated to continuous improvement and always listens to its community.  
+
+We began with small projects and gradually developed a suite of utilities that are powerful yet easy to use.  
+From calculators to file management and note-taking, every tool was designed with attention to detail.  
+The team believes in a user-first philosophy, designing features that make life easier and work more efficient.  
+    </p>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="section">
+    <h2>Download</h2>
+    <div class="download-links">
+      <div class="download-row">
+        <span class="download-text">Download Maxcore Utilities for Windows:</span>
+        <a href="MaxCoreUtilitiesWindows.zip" class="btn" download>Download</a>
+      </div>
+      <div class="download-row">
+        <span class="download-text">Download Maxcore Utilities for Mac:</span>
+        <a href="MaxCoreUtilitiesMac.zip" class="btn" download>Download</a>
+      </div>
+      <div class="download-row">
+        <span class="download-text">Download Maxcore Utilities for Linux:</span>
+        <a href="MaxCoreUtilitiesLinux.zip" class="btn" download>Download</a>
+      </div>
+    </div>
+    <p style="margin-top: 30px;">
+After downloading, follow the instructions to install and start using the utilities.  
+All versions are tested for stability and performance.  
+
+If you encounter issues during download or installation, please contact us at haquemuhyminn@gmail.com.  
+We provide step-by-step guides, troubleshooting tips, and assistance to ensure a smooth experience.  
+    </p>
+  </section>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('sideMenu').classList.toggle('active');
+}
+
+// Show the clicked section and hide others
+function showSection(id) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  toggleMenu(); // close side menu after clicking
+}
+
+// Expand card
+function toggleCard(btn) {
+  const card = btn.parentElement;
+  card.classList.toggle('expanded');
+  btn.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+}
+</script>
+
 </body>
 </html>
