@@ -3,313 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maxcore Utilities</title>
+<title>MaxCore Utilities</title>
 <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: #fff;
-    overflow-x: hidden;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-  /* Banner */
-  .banner {
-    width: 100%;
-    height: 250px;
-    background-image: url('Max core utilities showcase.png'); /* Your image */
-    background-size: cover;
-    background-position: center;
-    border-radius: 0 0 5px 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    position: relative;
-  }
-  .banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.4); /* Dark overlay for better text readability */
-    border-radius: 0 0 5px 5px;
-  }
-  .banner h1 {
-    font-size: 2.5em;
-    margin: 0;
-    color: #fff;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 1;
-  }
-  .banner p {
-    font-size: 1.2em;
-    color: #ccc;
-    margin-top: 10px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Burger Icon */
-  .burger {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    width: 25px;
-    height: 18px;
-    cursor: pointer;
-    z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .burger div {
-    height: 2px;
-    background-color: #fff;
-    border-radius: 2px;
-    transition: 0.4s ease;
-  }
-
-  /* Side Menu */
-  .side-menu {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    width: 260px;
-    height: 100vh;
-    background-color: #1a1a1a;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.4);
-    border-radius: 0 5px 5px 0;
-    transition: left 0.4s ease;
-    z-index: 1000;
-    padding-top: 80px;
-  }
-  .side-menu.active { left: 0; }
-  .side-menu a {
-    display: block;
-    color: #fff;
-    padding: 18px 25px;
-    text-decoration: none;
-    transition: 0.3s ease;
-    border-radius: 5px;
-  }
-  .side-menu a:hover { background-color: #007bff; }
-
-  /* Sections (hide by default) */
-  .section {
-    display: none;
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #1e1e1e;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  }
-  .section.active { display: block; }
-  .section h2 {
-    color: #007bff;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .section p {
-    color: #ccc;
-    line-height: 1.6em;
-    white-space: pre-line;
-  }
-
-  /* Dashboard Cards */
-  .dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-  }
-  .card {
-    background-color: #1e1e1e;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-  }
-  .card:hover { transform: translateY(-3px); }
-  .card h3 { color: #007bff; margin-top: 0; }
-  .card p { color: #ccc; line-height: 1.5em; max-height: 50px; overflow: hidden; transition: max-height 0.4s ease; }
-  .card.expanded p { max-height: 1000px; }
-
-  .btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 18px;
-    cursor: pointer;
-    margin-top: auto;
-    align-self: flex-start;
-    transition: 0.4s ease;
-  }
-  .btn:hover { background-color: #0056d2; transform: scale(1.05); }
-
-  /* Download Section Alignment Fix */
-  .download-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .download-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .download-text {
-    color: #ccc;
-    min-width: 200px;
-  }
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;transition:all 0.3s;}
+body{background:linear-gradient(145deg,#091121,#0f1e36);color:#fff;overflow-x:hidden;scroll-behavior:smooth;}
+nav{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  padding:18px 40px;
+  background:rgba(15,25,45,0.8);
+  backdrop-filter:blur(10px);
+  position:fixed;
+  top:0;
+  z-index:100;
+  border-radius:0 0 25px 25px;
+}
+nav .logo{
+  font-size:1.5rem;
+  font-weight:600;
+  color:#70b8ff;
+  margin-left:70px;
+}
+.burger{
+  width:30px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  position:fixed;
+  left:20px;
+  top:20px;
+  z-index:101;
+}
+.burger div{
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+  transition:0.3s;
+}
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100vh;
+  background:rgba(15,25,45,0.95);
+  backdrop-filter:blur(10px);
+  box-shadow:2px 0 12px rgba(0,0,0,0.4);
+  transition:left 0.4s ease;
+  padding-top:80px;
+  z-index:100;
+  border-radius:0 10px 10px 0;
+}
+.side-menu.active{left:0;}
+.side-menu a{
+  display:block;
+  color:#fff;
+  padding:20px 25px;
+  text-decoration:none;
+  border-radius:5px;
+  font-weight:500;
+  transition:0.3s;
+}
+.side-menu a:hover{background:#007bff;}
+.hero{
+  height:65vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:0 20px;
+  margin-top:80px;
+}
+.hero h1{
+  font-size:3rem;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#66b3ff,#99ccff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 1s forwards 0.3s;
+}
+.hero p{
+  font-size:1.3rem;
+  color:#cfd8e3;
+  max-width:700px;
+  line-height:2;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 1s forwards 0.5s;
+}
+.section{
+  padding:250px 10%;
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.6s ease;
+}
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.section h2{
+  font-size:2.6rem;
+  color:#99ccff;
+  margin-bottom:30px;
+}
+.section p{
+  color:#cfd8e3;
+  font-size:1.1rem;
+  line-height:2;
+  max-width:800px;
+  margin:0 auto;
+}
+.showcase{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:50px;
+  margin-top:60px;
+}
+.card{
+  background:rgba(255,255,255,0.05);
+  border-radius:18px;
+  padding:30px;
+  backdrop-filter:blur(8px);
+  box-shadow:0 6px 25px rgba(0,0,0,0.4);
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.card h3{color:#80bfff;font-size:1.4rem;margin-bottom:15px;}
+.card p{font-size:1rem;color:#d1d9e3;}
+.btn{
+  display:inline-block;
+  background:#007bff;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:8px;
+  margin-top:15px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.btn:hover{background:#0056d2;transform:scale(1.05);}
+footer{
+  text-align:center;
+  padding:60px 0;
+  color:#9db4d1;
+  background:rgba(15,25,45,0.85);
+  border-top:1px solid rgba(255,255,255,0.1);
+  border-radius:30px 30px 0 0;
+  margin-top:80px;
+}
+@keyframes fadeUp{
+  to{opacity:1; transform:translateY(0);}
+}
+@media(max-width:600px){
+  .hero h1{font-size:2.5rem}
+  .hero p{font-size:1.1rem}
+  .burger{left:15px;top:15px;}
+}
 </style>
 </head>
 <body>
 
-<!-- Burger Icon -->
+<nav><div class="logo">MaxCore Utilities</div></nav>
+
 <div class="burger" onclick="toggleMenu()">
   <div></div>
   <div></div>
   <div></div>
 </div>
 
-<!-- Side Menu -->
 <div class="side-menu" id="sideMenu">
-  <a href="#" onclick="showSection('dashboard')">Home</a>
-  <a href="#" onclick="showSection('contact')">Contact Us</a>
-  <a href="#" onclick="showSection('about')">About Us</a>
-  <a href="#" onclick="showSection('download')">Download</a>
+  <a href="#dashboard" onclick="scrollToSection('dashboard')">Dashboard</a>
+  <a href="#about" onclick="scrollToSection('about')">About</a>
+  <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+  <a href="#download" onclick="scrollToSection('download')">Download</a>
 </div>
 
-<!-- Banner -->
-<div class="banner">
-  <h1>Maxcore Utilities</h1>
-  <p>by Wave Studios   •   Efficient, Modern, Fully Functional</p>
-</div>
+<section class="hero" id="dashboard">
+  <h1>MaxCore Utilities</h1>
+  <p>Efficient, modern, fully functional utility suite for Windows, Mac, and Linux.</p>
+</section>
 
-<!-- Main Content -->
-<div id="mainContent">
-  <!-- Dashboard Section -->
-  <section id="dashboard" class="section active">
-    <h2>Dashboard</h2>
-    <div class="dashboard-cards">
-      <div class="card">
-        <h3>Calculator</h3>
-        <p>Powerful calculator for your needs.</p>
-        <button class="btn" onclick="toggleCard(this)">Read More</button>
-      </div>
-      <div class="card">
-        <h3>Notes</h3>
-        <p>Create and organize notes efficiently.</p>
-        <button class="btn" onclick="toggleCard(this)">Read More</button>
-      </div>
-      <div class="card">
-        <h3>FileSystem</h3>
-        <p>Manage files and directories easily.</p>
-        <button class="btn" onclick="toggleCard(this)">Read More</button>
-      </div>
-      <div class="card">
-        <h3>Clock</h3>
-        <p>Keep track of time, alarms, and timers.</p>
-        <button class="btn" onclick="toggleCard(this)">Read More</button>
-      </div>
-      <div class="card">
-        <h3>Download Utility</h3>
-        <p>Access download tools and resources.</p>
-        <button class="btn" onclick="toggleCard(this)">Read More</button>
-      </div>
+<section class="section" id="about">
+  <h2>About Us</h2>
+  <p>
+MaxCore Utilities is developed by Wave Studios to provide a comprehensive suite of tools for productivity and system management. Contact us at haquemuhyminn@gmail.com to suggest features, report bugs, or request support. We carefully review every message to make the software better and more efficient. Include screenshots or examples if necessary to explain your idea.
+  </p>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact</h2>
+  <p>
+Email: haquemuhyminn@gmail.com  
+Studio: Wave Studios  
+Parent Company: Tapoder Traders  
+We're open to collaborations, project ideas, and partnerships.
+  </p>
+</section>
+
+<section class="section" id="download">
+  <h2>Download</h2>
+  <div class="showcase">
+    <div class="card">
+      <h3>Windows Version</h3>
+      <a href="MaxCoreUtilitiesWindows.zip" class="btn" download>Download .zip</a>
     </div>
-  </section>
-
-  <!-- Contact Us Section -->
-  <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <p>
-To make better updates, please contact us at haquemuhyminn@gmail.com. We'll help you to make your wish fully.  
-You can ask anything about Maxcore Utilities, suggest new features, or report issues.  
-Our team at Wave Studios will review every message carefully and try to implement your ideas as soon as possible.  
-Please make sure to include all details when contacting us.  
-
-We value every user feedback. Your suggestions help us make the software better and more efficient.  
-Whether it is a minor UI tweak or a major feature request, we are open to hearing from you.  
-Feel free to include screenshots or examples if it helps explain your point.
-    </p>
-  </section>
-
-  <!-- About Us Section -->
-  <section id="about" class="section">
-    <h2>About Us</h2>
-    <p>
-Wave Studios created Maxcore Utilities to provide users with a modern, efficient, and fully functional utility platform.  
-Our mission is to combine creativity with productivity, giving users tools they actually enjoy using.  
-Wave Studios is dedicated to continuous improvement and always listens to its community.  
-
-We began with small projects and gradually developed a suite of utilities that are powerful yet easy to use.  
-From calculators to file management and note-taking, every tool was designed with attention to detail.  
-The team believes in a user-first philosophy, designing features that make life easier and work more efficient.  
-    </p>
-  </section>
-
-  <!-- Download Section -->
-  <section id="download" class="section">
-    <h2>Download</h2>
-    <div class="download-links">
-      <div class="download-row">
-        <span class="download-text">Download Maxcore Utilities for Windows:</span>
-        <a href="MaxCoreUtilitiesWindows.zip" class="btn" download>Download</a>
-      </div>
-      <div class="download-row">
-        <span class="download-text">Download Maxcore Utilities for Mac:</span>
-        <a href="MaxCoreUtilitiesMac.zip" class="btn" download>Download</a>
-      </div>
-      <div class="download-row">
-        <span class="download-text">Download Maxcore Utilities for Linux:</span>
-        <a href="MaxCoreUtilitiesLinux.zip" class="btn" download>Download</a>
-      </div>
+    <div class="card">
+      <h3>Mac Version</h3>
+      <a href="MaxCoreUtilitiesMac.zip" class="btn" download>Download .zip</a>
     </div>
-    <p style="margin-top: 30px;">
-After downloading, follow the instructions to install and start using the utilities.  
-All versions are tested for stability and performance.  
+    <div class="card">
+      <h3>Linux Version</h3>
+      <a href="MaxCoreUtilitiesLinux.zip" class="btn" download>Download .zip</a>
+    </div>
+  </div>
+</section>
 
-If you encounter issues during download or installation, please contact us at haquemuhyminn@gmail.com.  
-We provide step-by-step guides, troubleshooting tips, and assistance to ensure a smooth experience.  
-    </p>
-  </section>
-</div>
+<footer>
+  © 2025 MaxCore Utilities — Powered by Wave Studios.
+</footer>
 
 <script>
-function toggleMenu() {
+function toggleMenu(){
   document.getElementById('sideMenu').classList.toggle('active');
 }
 
-// Show the clicked section and hide others
-function showSection(id) {
-  const sections = document.querySelectorAll('.section');
-  sections.forEach(sec => sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  toggleMenu(); // close side menu after clicking
+// Smooth scroll
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('sideMenu').classList.remove('active');
 }
 
-// Expand card
-function toggleCard(btn) {
-  const card = btn.parentElement;
-  card.classList.toggle('expanded');
-  btn.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
-}
+// Animate sections on scroll
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+  sections.forEach(sec=>{
+    const top = sec.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sec.classList.add('visible');
+    }
+  });
+});
 </script>
 
 </body>
