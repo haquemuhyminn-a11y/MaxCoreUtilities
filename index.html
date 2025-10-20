@@ -223,6 +223,19 @@ nav .logo{
   box-shadow: 0 10px 25px rgba(102,179,255,0.4);
 }
 
+
+.btn.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.download-note {
+  margin-top: 20px;
+  color: #99ccff;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 /* FOOTER */
 footer{
   text-align: center;
@@ -299,9 +312,9 @@ footer{
   <h2>Download Now</h2>
   <p>Available for all major platforms. Lightweight, fast, and completely free.</p>
   <div class="downloads">
-    <a href="#" class="btn">Windows 10/11</a>
-    <a href="#" class="btn">macOS</a>
-    <a href="#" class="btn">Linux</a>
+    <a href="MaxCoreUtilitiesWindows.zip" class="btn" download onclick="startDownload('windows')">Windows 10/11</a>
+    <a href="MaxCoreUtilitiesMac.zip" class="btn" download onclick="startDownload('macOS')">macOS</a>
+    <a href="MaxCoreUtilitiesLinux.zip" class="btn" download onclick="startDownload('Linux')">Linux</a>
   </div>
 </section>
 
@@ -323,6 +336,24 @@ function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
   document.getElementById('sideMenu').classList.remove('active');
 }
+
+// Download functions
+function startDownload(platform) {
+  if (platform === 'windows') {
+    // Create a simple text file as placeholder (replace with actual software)
+    const content = "MaxCore Utilities - Windows Version\nThis is a placeholder download file.\n\nActual software coming soon!\n\nVisit: https://haquemuhyminn-a11y.github.io/MaxCoreUtilities/";
+    const blob = new Blob([content], { type: 'application/zip' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'MaxCoreUtilities-Windows.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+}
+
 
 const sections = document.querySelectorAll('.section');
 window.addEventListener('scroll', () => {
