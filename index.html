@@ -1,197 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wave Studios</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    /* NAVIGATION */
-    .menu {
-      background: #0a0a0a;
-      padding: 20px 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      background: linear-gradient(90deg, #0078d4, #00bcf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
-    }
-
-    .menu-links {
-      display: flex;
-      gap: 35px;
-    }
-
-    .menu-links a {
-      color: #bbb;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-
-    .menu-links a:hover {
-      color: #00bcf2;
-    }
-
-    /* HERO */
-    .hero {
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(145deg, #001, #012, #003);
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      font-size: 54px;
-      margin-bottom: 20px;
-      background: linear-gradient(90deg, #0078d4, #00bcf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 20px;
-      color: #aaa;
-      margin-bottom: 35px;
-    }
-
-    .btn {
-      padding: 12px 35px;
-      background: linear-gradient(90deg, #0078d4, #00bcf2);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: 0.25s;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-      transform: scale(1.05);
-    }
-
-    /* PRODUCTS */
-    .products {
-      padding: 100px 50px;
-      background: #0d0d0d;
-    }
-
-    .products h2 {
-      text-align: center;
-      font-size: 38px;
-      margin-bottom: 60px;
-      background: linear-gradient(90deg, #0078d4, #00bcf2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .product-card {
-      background: #1a1a1a;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid #222;
-      transition: 0.3s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-6px);
-      border-color: #00bcf2;
-      box-shadow: 0 0 15px #00bcf245;
-    }
-
-    .product-card h3 {
-      color: #00bcf2;
-      margin: 20px 0;
-      font-size: 24px;
-    }
-
-    .product-card p {
-      color: #aaa;
-      margin-bottom: 20px;
-    }
-
-    /* FOOTER */
-    .footer {
-      background: #000;
-      padding: 40px;
-      text-align: center;
-      border-top: 1px solid #222;
-    }
-
-    .footer p {
-      color: #666;
-      font-size: 14px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 36px;
-      }
-      .menu {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .menu-links {
-        gap: 20px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wave Studios</title>
+<style>
+  /* Reset & base */
+  * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+  body {background:#0a0a0a; color:#fff; line-height:1.6; overflow-x:hidden;}
+  a {text-decoration:none; transition:0.3s;}
+  
+  /* NAVIGATION */
+  .menu {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 50px; background:#0d0d0d; position:sticky; top:0; z-index:100;
+    border-bottom:1px solid #222;
+  }
+  .logo {
+    font-size:28px; font-weight:bold;
+    background:linear-gradient(90deg,#0078d4,#00bcf2);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .menu-links {display:flex; gap:35px;}
+  .menu-links a {color:#bbb; font-weight:500;}
+  .menu-links a:hover {color:#00bcf2;}
+  
+  /* HERO */
+  .hero {
+    height:90vh; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:0 20px;
+    background:linear-gradient(145deg,#001,#012,#003);
+  }
+  .hero h1 {
+    font-size:56px; margin-bottom:20px;
+    background:linear-gradient(90deg,#0078d4,#00bcf2);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero p {font-size:20px; color:#aaa; margin-bottom:35px;}
+  .btn {
+    padding:12px 35px; border-radius:8px; font-size:16px; cursor:pointer;
+    display:inline-block; background:linear-gradient(90deg,#0078d4,#00bcf2);
+    color:#fff; border:none;
+  }
+  .btn:hover {opacity:0.9; transform:scale(1.05);}
+  
+  /* PRODUCTS */
+  .products {
+    padding:100px 50px; display:flex; flex-direction:column; align-items:center;
+  }
+  .products h2 {
+    font-size:38px; margin-bottom:60px;
+    background:linear-gradient(90deg,#0078d4,#00bcf2);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .product-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px; width:100%; max-width:1200px;
+  }
+  .product-card {
+    background:#111; padding:30px; border-radius:12px; text-align:center;
+    border:1px solid #222; box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+  }
+  .product-card:hover {transform:translateY(-8px); box-shadow:0 10px 25px rgba(0,188,242,0.3);}
+  .product-card h3 {color:#00bcf2; margin:20px 0; font-size:24px;}
+  .product-card p {color:#aaa; margin-bottom:20px;}
+  
+  /* FOOTER */
+  .footer {
+    background:#0d0d0d; padding:40px; text-align:center; border-top:1px solid #222;
+  }
+  .footer p {color:#666; font-size:14px;}
+  
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .hero h1 {font-size:36px;}
+    .menu {flex-direction:column; gap:10px;}
+    .menu-links {gap:20px;}
+  }
+</style>
 </head>
 <body>
+
   <!-- MENU -->
-  <div class="menu">
-    <div class="logo">WAVE STUDIOS</div>
+  <nav class="menu">
+    <div class="logo">Wave Studios</div>
     <div class="menu-links">
       <a href="#products">Products</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-  </div>
+  </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div>
-      <h1>WAVE STUDIOS</h1>
+      <h1>Wave Studios</h1>
       <p>Building the future of software</p>
       <a href="#products" class="btn">View Products</a>
     </div>
@@ -199,20 +103,18 @@
 
   <!-- PRODUCTS -->
   <section class="products" id="products">
-    <h2>OUR PRODUCTS</h2>
+    <h2>Our Products</h2>
     <div class="product-grid">
       <div class="product-card">
         <h3>MaxCore Utilities</h3>
         <p>System optimization tools for maximum performance.</p>
         <a href="#" class="btn">Download</a>
       </div>
-
       <div class="product-card">
         <h3>WebBasePlate</h3>
         <p>Modern web development framework for fast deployment.</p>
         <a href="#" class="btn">Get Started</a>
       </div>
-
       <div class="product-card">
         <h3>Wave Framework</h3>
         <p>Enterprise-grade development platform built for speed.</p>
@@ -225,5 +127,6 @@
   <footer class="footer">
     <p>© 2025 Wave Studios | haquemuhyminn@gmail.com</p>
   </footer>
+
 </body>
 </html>
