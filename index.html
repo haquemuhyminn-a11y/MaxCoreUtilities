@@ -3,130 +3,397 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wave Studios</title>
+<title>MaxCore Utilities</title>
 <style>
-  /* Reset & base */
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
-  body {background:#0a0a0a; color:#fff; line-height:1.6; overflow-x:hidden;}
-  a {text-decoration:none; transition:0.3s;}
-  
-  /* NAVIGATION */
-  .menu {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:20px 50px; background:#0d0d0d; position:sticky; top:0; z-index:100;
-    border-bottom:1px solid #222;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;transition:all 0.3s;}
+body{background:#0a0f1f;color:#fff;overflow-x:hidden;scroll-behavior:smooth;}
+
+/* GLASS NAVBAR */
+nav{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  padding:18px 40px;
+  background:rgba(15,25,45,0.9);
+  backdrop-filter:blur(15px);
+  position:fixed;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid rgba(100,150,255,0.2);
+}
+nav .logo{
+  font-size:1.6rem;
+  font-weight:600;
+  background:linear-gradient(90deg,#66b3ff,#99ccff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-left:70px;
+}
+
+/* BURGER MENU */
+.burger{
+  width:30px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  position:fixed;
+  left:20px;
+  top:20px;
+  z-index:101;
+}
+.burger div{
+  height:3px;
+  background:#66b3ff;
+  border-radius:2px;
+  transition:0.3s;
+}
+
+/* SIDE MENU */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:280px;
+  height:100vh;
+  background:rgba(15,25,45,0.95);
+  backdrop-filter:blur(20px);
+  box-shadow:5px 0 25px rgba(0,0,0,0.4);
+  transition:left 0.4s ease;
+  padding-top:90px;
+  z-index:99;
+  border-right:1px solid rgba(100,150,255,0.2);
+}
+.side-menu.active{left:0;}
+.side-menu a{
+  display:block;
+  color:#ccd9ff;
+  padding:18px 30px;
+  text-decoration:none;
+  border-radius:8px;
+  margin:8px 20px;
+  font-weight:500;
+  border-left:3px solid transparent;
+}
+.side-menu a:hover{
+  background:rgba(100,150,255,0.1);
+  border-left:3px solid #66b3ff;
+}
+
+/* DASHBOARD HERO */
+.dashboard-hero{
+  min-height: 100vh;
+  padding: 120px 10% 80px;
+  background: linear-gradient(135deg, #0a0f1f 0%, #152642 50%, #0a0f1f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('Max core utilities showcase.png') center/cover;
+  opacity: 0.1;
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-content h1{
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #66b3ff, #99ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s forwards 0.3s;
+}
+
+.hero-content p{
+  font-size: 1.3rem;
+  color: #ccd9ff;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s forwards 0.5s;
+}
+
+/* DASHBOARD STATS */
+.dashboard-stats{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 60px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-card{
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(100,150,255,0.2);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover{
+  transform: translateY(-8px);
+  border-color: rgba(100,150,255,0.4);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.stat-number{
+  font-size: 2.5rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #66b3ff, #99ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.stat-label{
+  color: #ccd9ff;
+  font-size: 1rem;
+}
+
+/* SECTION STYLES */
+.section{
+  padding: 120px 10%;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+.section.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+.section h2{
+  font-size: 2.6rem;
+  color: #99ccff;
+  margin-bottom: 30px;
+}
+.section p{
+  color: #ccd9ff;
+  font-size: 1.1rem;
+  line-height: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* DOWNLOAD BUTTONS */
+.downloads{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.btn{
+  background: linear-gradient(90deg, #66b3ff, #3399ff);
+  color: white;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+.btn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(102,179,255,0.4);
+}
+
+
+.btn.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.download-note {
+  margin-top: 20px;
+  color: #99ccff;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* FOOTER */
+footer{
+  text-align: center;
+  padding: 60px 0;
+  color: #99b3e6;
+  background: rgba(15,25,45,0.9);
+  border-top: 1px solid rgba(100,150,255,0.2);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 768px){
+  .dashboard-stats{
+    grid-template-columns: 1fr;
   }
-  .logo {
-    font-size:28px; font-weight:bold;
-    background:linear-gradient(90deg,#0078d4,#00bcf2);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  .hero-content h1{
+    font-size: 2.8rem;
   }
-  .menu-links {display:flex; gap:35px;}
-  .menu-links a {color:#bbb; font-weight:500;}
-  .menu-links a:hover {color:#00bcf2;}
-  
-  /* HERO */
-  .hero {
-    height:90vh; display:flex; align-items:center; justify-content:center;
-    text-align:center; padding:0 20px;
-    background:linear-gradient(145deg,#001,#012,#003);
+  .burger{
+    left: 15px;
+    top: 15px;
   }
-  .hero h1 {
-    font-size:56px; margin-bottom:20px;
-    background:linear-gradient(90deg,#0078d4,#00bcf2);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  }
-  .hero p {font-size:20px; color:#aaa; margin-bottom:35px;}
-  .btn {
-    padding:12px 35px; border-radius:8px; font-size:16px; cursor:pointer;
-    display:inline-block; background:linear-gradient(90deg,#0078d4,#00bcf2);
-    color:#fff; border:none;
-  }
-  .btn:hover {opacity:0.9; transform:scale(1.05);}
-  
-  /* PRODUCTS */
-  .products {
-    padding:100px 50px; display:flex; flex-direction:column; align-items:center;
-  }
-  .products h2 {
-    font-size:38px; margin-bottom:60px;
-    background:linear-gradient(90deg,#0078d4,#00bcf2);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  }
-  .product-grid {
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px; width:100%; max-width:1200px;
-  }
-  .product-card {
-    background:#111; padding:30px; border-radius:12px; text-align:center;
-    border:1px solid #222; box-shadow:0 5px 15px rgba(0,0,0,0.3);
-    transition:0.3s;
-  }
-  .product-card:hover {transform:translateY(-8px); box-shadow:0 10px 25px rgba(0,188,242,0.3);}
-  .product-card h3 {color:#00bcf2; margin:20px 0; font-size:24px;}
-  .product-card p {color:#aaa; margin-bottom:20px;}
-  
-  /* FOOTER */
-  .footer {
-    background:#0d0d0d; padding:40px; text-align:center; border-top:1px solid #222;
-  }
-  .footer p {color:#666; font-size:14px;}
-  
-  /* RESPONSIVE */
-  @media(max-width:768px){
-    .hero h1 {font-size:36px;}
-    .menu {flex-direction:column; gap:10px;}
-    .menu-links {gap:20px;}
-  }
+}
 </style>
 </head>
 <body>
 
-  <!-- MENU -->
-  <nav class="menu">
-    <div class="logo">Wave Studios</div>
-    <div class="menu-links">
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+<nav><div class="logo">MaxCore Utilities</div></nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h1>Wave Studios</h1>
-      <p>Building the future of software</p>
-      <a href="#products" class="btn">View Products</a>
-    </div>
-  </section>
+<div class="burger" onclick="toggleMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
 
-  <!-- PRODUCTS -->
-  <section class="products" id="products">
-    <h2>Our Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <h3>MaxCore Utilities</h3>
-        <p>System optimization tools for maximum performance.</p>
-        <a href="#" class="btn">Download</a>
+<div class="side-menu" id="sideMenu">
+  <a href="#dashboard" onclick="scrollToSection('dashboard')">Dashboard</a>
+  <a href="#features" onclick="scrollToSection('features')">Features</a>
+  <a href="#download" onclick="scrollToSection('download')">Download</a>
+  <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+</div>
+
+<!-- DASHBOARD SECTION -->
+<section class="dashboard-hero" id="dashboard">
+  <div class="hero-content">
+    <h1>MaxCore Utilities</h1>
+    <p>32 Powerful Tools for Ultimate System Performance & Productivity</p>
+    
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <span class="stat-number">32+</span>
+        <span class="stat-label">System Tools</span>
       </div>
-      <div class="product-card">
-        <h3>WebBasePlate</h3>
-        <p>Modern web development framework for fast deployment.</p>
-        <a href="#" class="btn">Get Started</a>
+      <div class="stat-card">
+        <span class="stat-number">50%</span>
+        <span class="stat-label">Faster Performance</span>
       </div>
-      <div class="product-card">
-        <h3>Wave Framework</h3>
-        <p>Enterprise-grade development platform built for speed.</p>
-        <a href="#" class="btn">Learn More</a>
+      <div class="stat-card">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Safe & Secure</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Wave Studios | haquemuhyminn@gmail.com</p>
-  </footer>
+<section class="section" id="features">
+  <h2>Advanced Features</h2>
+  <p>MaxCore Utilities combines powerful system optimization with an intuitive interface. Clean your registry, boost startup times, manage processes, and much more with our comprehensive toolkit.</p>
+</section>
 
+<section class="section" id="download">
+  <h2>Download Now</h2>
+  <p>Available for all major platforms. Lightweight, fast, and completely free.</p>
+  <div class="downloads">
+    <a href="MaxCoreUtilitiesWindows.zip" class="btn" download onclick="startDownload('windows')">Windows 10/11</a>
+    <a href="MaxCoreUtilitiesMac.zip" class="btn" download onclick="startDownload('macOS')">macOS</a>
+    <a href="MaxCoreUtilitiesLinux.zip" class="btn" download onclick="startDownload('Linux')">Linux</a>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact Support</h2>
+  <p>Email: haquemuhyminn@gmail.com<br>Developed by Wave Studios • Tapoder Traders</p>
+</section>
+
+<footer>
+  © 2025 MaxCore Utilities — Powered by Wave Studios
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('sideMenu').classList.toggle('active');
+}
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.getElementById('sideMenu').classList.remove('active');
+}
+
+// Download functions
+function startDownload(platform) {
+  if (platform === 'windows') {
+    // Create a simple text file as placeholder (replace with actual software)
+    const content = "MaxCore Utilities - Windows Version\nThis is a placeholder download file.\n\nActual software coming soon!\n\nVisit: https://haquemuhyminn-a11y.github.io/MaxCoreUtilities/";
+    const blob = new Blob([content], { type: 'application/zip' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'MaxCoreUtilities-Windows.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+}
+
+
+const sections = document.querySelectorAll('.section');
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sec.classList.add('visible');
+    }
+  });
+});
+
+// Animate stats counting
+function animateStats(){
+  const stats = document.querySelectorAll('.stat-number');
+  stats.forEach(stat => {
+    const target = parseInt(stat.textContent);
+    let current = 0;
+    const increment = target / 50;
+    const timer = setInterval(() => {
+      current += increment;
+      if(current >= target){
+        clearInterval(timer);
+        current = target;
+      }
+      stat.textContent = Math.floor(current) + (stat.textContent.includes('%') ? '%' : '+');
+    }, 40);
+  });
+}
+
+// Trigger stats animation when dashboard is visible
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      animateStats();
+      observer.unobserve(entry.target);
+    }
+  });
+});
+
+observer.observe(document.querySelector('.dashboard-stats'));
+</script>
 </body>
 </html>
